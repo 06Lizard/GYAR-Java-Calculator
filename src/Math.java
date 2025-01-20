@@ -41,39 +41,41 @@ public class Math {
         return java.lang.Math.abs(value);
     }
 
-    public static String calculate(String exp) {
+    public static double calculate(String exp) {
         exp = exp.replace(" ", "");
         char[] operators = {'+', '-', '*', '/', '^'};
         
-        for (char op : operators) {
-            int opIndex = exp.indexOf(op);
-            if (opIndex != -1) {
-                try {
+        try {
+            for (char op : operators) {
+                int opIndex = exp.indexOf(op);
+                if (opIndex != -1) {
                     double operand1 = Double.parseDouble(exp.substring(0, opIndex));
                     double operand2 = Double.parseDouble(exp.substring(opIndex + 1));
-                    
+
                     switch (op) {
                         case '+' -> {
-                            return String.valueOf(add(operand1, operand2));
+                            return add(operand1, operand2);
                         }
                         case '-' -> {
-                            return String.valueOf(sub(operand1, operand2));
+                            return sub(operand1, operand2);
                         }
                         case '*' -> {
-                            return String.valueOf(multi(operand1, operand2));
+                            return multi(operand1, operand2);
                         }
                         case '/' -> {
-                            return String.valueOf(divi(operand1, operand2));
+                            return divi(operand1, operand2);
                         }
                         case '^' -> {
-                            return String.valueOf(pow(operand1, operand2));
+                            return pow(operand1, operand2);
                         }
-                    }
-                } catch (NumberFormatException e) {
-                    return "Invalid expression";
+                    }                    
                 }
             }
+            throw new IllegalArgumentException("No valid operator found");
+        } catch (Exception e) {
+            // Catch any kind of exception
+            System.err.println("Error: " + e.getMessage());
+            return Double.NaN; // Return NaN for any error
         }
-        return "No valid operator found";
     }
 }

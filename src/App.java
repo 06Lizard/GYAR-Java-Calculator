@@ -10,7 +10,15 @@ public class App {
                     Operators: +, -, *, /, ^
                     Enter a mathematical expression: """);
                 String exp = scanner.nextLine();
-                System.out.println(Math.calculate(exp));
+
+                long startTime = System.nanoTime(); // start timmer
+
+                double ans = Math.calculate(exp);      
+
+                long endTime = System.nanoTime(); // end timmer
+                long duration = (endTime - startTime) / 1000; // duration in microseconds
+
+                System.out.println("\t" + exp + " = " + ans + "\n\t" + duration + " microseconds\n");
             }
         }
     }
